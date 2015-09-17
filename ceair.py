@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 import os
 import sys
+import time
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -12,7 +13,7 @@ browser = webdriver.Firefox()
 base_url = "http://www.ceair.com/flight2014/"
 
 #store result in ch.out
-out_file = "ceair.out"
+out_file = "ceair-" + time.strftime("%Y-%m-%d", time.localtime(time.time())) + ".out"
 
 def get_type_prices(type_name, idx):
 	eles = browser.find_elements_by_name(type_name)

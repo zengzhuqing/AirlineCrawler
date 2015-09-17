@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from time import sleep
 import os
 import sys
+import time
 reload(sys)
 sys.setdefaultencoding('utf8')
 
@@ -13,7 +14,7 @@ base_url = "http://flights.ch.com/"
 class_name = 'f-ib'
 
 #store result in ch.out
-out_file = "ch.out"
+out_file = "ch-" + time.strftime("%Y-%m-%d", time.localtime(time.time())) + ".out"
 
 def get_prices(ori_code, dest_code, date):
 	url = base_url + ori_code + "-" + dest_code + ".html?SType=0&IfRet=false&Oricode=" + ori_code + "&DestCode=" + dest_code + "&MType=0&FDate=" + date + "&ANum=1&CNum=0&INum=0"
