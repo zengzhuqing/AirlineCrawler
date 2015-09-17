@@ -26,7 +26,9 @@ def get_prices(ori_code, dest_code, date):
 		text = e.text
 		if text == "":
 			continue
-		if ord(text[0]) == 0xa5:
+		if ord(text[0]) == 45:
+			ans.append('--')
+		elif ord(text[0]) == 0xa5:
 			ans.append(text.split('\n')[0][2:])
 	
 	ret = ["","",""]
