@@ -22,7 +22,11 @@ def get_type_prices(type_name, idx):
 		text = e.text
 		if text == "":
 			continue
-		if ord(text[0]) != 65509:
+		if ord(text[0]) == 24050: ##sell out
+			ans += '--'
+			ans += '/'
+			continue
+		if ord(text[0]) != 65509: ## ￥
 			continue
 		for ii in text.split('\n')[0][1:]:
 			if ii != ',':
@@ -37,6 +41,7 @@ def get_prices(ori_code, dest_code, date):
 
 	ret = ["","","",""]
 
+	sleep(5)
 	ret[0] = get_type_prices("first", 0)	
 	ret[1] = get_type_prices("business", 1)	
 	ret[2] = get_type_prices("economy", 2)	
