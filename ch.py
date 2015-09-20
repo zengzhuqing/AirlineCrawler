@@ -19,6 +19,7 @@ out_file = "ch-" + time.strftime("%Y-%m-%d", time.localtime(time.time())) + ".ou
 def get_prices(ori_code, dest_code, date):
 	url = base_url + ori_code + "-" + dest_code + ".html?SType=0&IfRet=false&Oricode=" + ori_code + "&DestCode=" + dest_code + "&MType=0&FDate=" + date + "&ANum=1&CNum=0&INum=0"
 	browser.get(url)
+	sleep(1)
 	eles = browser.find_elements_by_class_name(class_name)
 	
 	ans = []
@@ -53,7 +54,6 @@ def get_prices(ori_code, dest_code, date):
 #烟台，南通
 cities_code = ['SHA','HRB', 'TSN','TYN','CKG','CGQ','SHE','SIA','CAN','CTU','CSX','SJW','LHW','KWE','KWL','SYX','TAO','XMN','SZX','DLC','DYG','BAS','JJN','WUH','HGH','PEK','CGO','HAK','KMG','URC','NZH','INC','NKG','KHN','FOC','HFE','HET','SZV','WUX','NGB','TVS','YNT','NTG']
 #cities_code = ['SHA','HRB','TSN','NTG']
-ori_code = cities_code[0]
 dates = []
 for i in range(20, 32):
 	d = "2015-10-%02d" %(i)
@@ -66,9 +66,16 @@ for i in range(1, 21):
 	dates.append(d)
 
 with open(out_file, 'w+') as f:
-	for dest in cities_code[1:]:
+	ori_code = cities_code[0]
+	dest_code = cities_code[0]
+	for city in cities_code[1:]:
 		for date in dates:
-			for ele in get_prices(ori_code, dest, date):
+			for ele in get_prices(ori_code, city, date):
+				f.write(ele)
+				f.write(" ")
+		f.write('\n')
+		for date in dates:
+			for ele in get_prices(city, dest_code, date):
 				f.write(ele)
 				f.write(" ")
 		f.write('\n')

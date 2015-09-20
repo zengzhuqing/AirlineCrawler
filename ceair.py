@@ -57,7 +57,6 @@ def get_prices(ori_code, dest_code, date):
 #唐山，烟台，南通
 cities_code = ['pvg','hrb', 'tsn','tyn','ckg','cgq','she','xiy','can','ctu','csx','sjw','lhw','kwe','kwl','syx','tao','xmn','szx','dlc','dyg','nbs','jjn','nzh','wuh','hgh','inc','nay','cgo','nkg','khn','kmg','tna','foc','hfe','het','urc','lxa','hak','xnn','szv','wux','fuo','ngb', 'tvs','ynt','ntg']
 #cities_code = ['SHA','HRB','TSN','NTG']
-ori_code = cities_code[0]
 dates = []
 for i in range(20, 32):
 	d = "1510%02d" %(i)
@@ -70,10 +69,18 @@ for i in range(1, 21):
 	dates.append(d)
 
 with open(out_file, 'w+') as f:
-	for dest in cities_code[1:]:
+	ori_code = cities_code[0]
+	dest_code = cities_code[0]
+	for city in cities_code[1:]:
 		for date in dates:
 			#TODO: sleep sometime 
-			for ele in get_prices(ori_code, dest, date):
+			for ele in get_prices(ori_code, city, date):
+				f.write(ele)
+				f.write(" ")
+		f.write('\n')
+		for date in dates:
+			#TODO: sleep sometime 
+			for ele in get_prices(city, dest_code, date):
 				f.write(ele)
 				f.write(" ")
 		f.write('\n')
