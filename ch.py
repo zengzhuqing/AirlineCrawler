@@ -36,10 +36,10 @@ def get_prices(ori_code, dest_code, date):
 		if i % 6 == 0:
 			ret[0] += ans[i]
 			ret[0] += "/"
-		elif i % 6 == 1:
+		elif i % 6 == 2:
 			ret[1] += ans[i]
 			ret[1] += "/"
-		elif i % 6 == 2:
+		elif i % 6 == 4:
 			ret[2] += ans[i]	
 			ret[2] += "/"
 	
@@ -72,7 +72,9 @@ with open(out_file, 'w+') as f:
 				f.write(ele)
 				f.write(" ")
 		f.write('\n')
-
-#print get_prices(ori_code, dest_code, date)
+"""
+dest_code = cities_code[1]
+print get_prices(ori_code, dest_code, '2015-10-20')
+"""
 
 browser.quit()
